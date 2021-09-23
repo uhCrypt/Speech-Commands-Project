@@ -1,6 +1,13 @@
 import subprocess
 import speech_recognition as sr
 import os
+import pyautogui
+
+def ui_ConfirmMsg(Desc, Ttl):
+    if pyautogui.confirm(text=Desc, title=Ttl) == "OK":
+        return "OK"
+    else:
+        return "CANCEL"
 
 def speech_recognition():
     r = sr.Recognizer()
@@ -29,11 +36,22 @@ def speech_recognition():
     query = query.lower()
 
     if query == "close program":
-        quit()
+        if ui_ConfirmMsg('Are you sure you want to close the program?', 'Are you sure?') == "OK":
+            quit()
+        else:
+            print("CANCELLED - close program")
+            
     if query == "lock system":
-        os.system("rundll32.exe user32.dll,LockWorkStation")
+        if ui_ConfirmMsg('Are you sure you want to lock your system?', 'Are you sure?') == "OK":
+            os.system("rundll32.exe user32.dll,LockWorkStation")
+        else:
+            print("CANCELLED - lock system")
+            
     if query == "shutdown" or query == "shut down":
-        os.system("shutdown /s /t 1")
+        if ui_ConfirmMsg('Are you sure you want to shutdown your system?', 'Are you sure?') == "OK":
+            os.system("shutdown /s /t 1")
+        else:
+            print("CANCELLED - shutdown/shut down")
 
 while True:
     speech_recognition()
