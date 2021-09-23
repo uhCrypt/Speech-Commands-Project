@@ -69,5 +69,5 @@ if platform_Version == "32bit" or platform_Version == "64bit":
     else:
         print("You don't have a compatable Python Version installed. Please make sure you have Python 2.7.X to Python 3.9.X installed.")
 else:
-    print("32bit or 64bit platform not detected. Please manually install the packages required in the 'Setup_Log.txt' file.")
+    print("32bit or 64bit platform not detected. Please manually install the packages required in the 'Manual.txt' file.")
     sys.exit()
