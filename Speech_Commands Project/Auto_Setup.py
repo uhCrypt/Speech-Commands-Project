@@ -109,7 +109,7 @@ if platform_Version == "32bit" or platform_Version == "64bit":
 
         print("Setup complete - This program will automatically terminate.\n")
         time.sleep(5)
-        os.remove()
+        quit()
     else:
         print("You don't have a compatable Python Version installed. Please make sure you have Python 2.7.X - Python 3.9.X installed.")
 else:
