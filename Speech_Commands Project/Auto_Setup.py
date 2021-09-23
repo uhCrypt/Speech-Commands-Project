@@ -10,7 +10,8 @@ print(sys.argv[0])
 
 # Functions
 def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    #subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    os.system('python -m pip install ' + os.path.join(package))
 
 # Unzipping files
 with zipfile.ZipFile(os.path.join(".\\Packages\Zipped\PyAudio.zip"), 'r') as zip_ref:
@@ -38,9 +39,15 @@ if platform_Version == "32bit" or platform_Version == "64bit":
             print("PyAudio is already installed, skipping step.")
         else:
             if platform_Version == "64bit":
-                install(os.path.join(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win_amd64.whl"))
+                if int(python_Version_Digit) >= 38:
+                    install(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win_amd64.whl")
+                else:
+                    install(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win_amd64.whl")
             else:
-                install(os.path.join(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win_amd64.whl"))
+                if int(python_Version_Digit) >= 38:
+                    install(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win32.whl")
+                else:
+                    install(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win32.whl")
             print("Successfully installed PyAudio.")
 
         print("Attempting to download and install SpeechRecognition...")
@@ -59,4 +66,3 @@ if platform_Version == "32bit" or platform_Version == "64bit":
 else:
     print("32bit or 64bit platform not detected. Please manually install the packages required in the 'Setup_Log.txt' file.")
     sys.exit()
-
