@@ -38,11 +38,6 @@ def installModule(packageName, packageInfo):
     subprocess.check_call([sys.executable, "-m", "pip", "install", packageInfo])
     print("Successfully installed ", packageName + ".\n")
 
-
-# Unzipping files
-with zipfile.ZipFile(os.path.join(".\\Packages\Zipped\PyAudio.zip"), 'r') as zip_ref:
-    zip_ref.extractall(os.path.join(".\\Packages\\Unzipped"))
-
 print("Checking platform bit...\n")
 platform_Version = platform.architecture()[0]
 
@@ -63,9 +58,14 @@ if platform_Version == "32bit" or platform_Version == "64bit":
         reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
         installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
 
+        # Installing PyAudio
         if 'PyAudio' in installed_packages:
             print("PyAudio is already installed, skipping step.\n")
         else:
+            # Unzipping files
+            with zipfile.ZipFile(os.path.join(".\\Packages\Zipped\PyAudio.zip"), 'r') as zip_ref:
+                zip_ref.extractall(os.path.join(".\\Packages\\Unzipped"))
+            # Running installation
             if platform_Version == "64bit":
                 if int(python_Version_Digit) >= 38:
                     installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win_amd64.whl")
@@ -78,6 +78,7 @@ if platform_Version == "32bit" or platform_Version == "64bit":
                     installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win32.whl")
             print("Successfully installed PyAudio.\n")
         
+        # Installing SpeechRecognition
         if 'SpeechRecognition' in installed_packages:
             import speech_recognition as sr
             if sr.__version__ == "3.8.1":
@@ -92,6 +93,7 @@ if platform_Version == "32bit" or platform_Version == "64bit":
         else:
             installModule("SpeechRecognition", "SpeechRecognition==3.8.1")
 
+        # Installing PyAutoGUI
         if 'PyAutoGUI' in installed_packages:
             import pyautogui as pyg
             if pyg.__version__ == "0.9.53":
