@@ -25,15 +25,15 @@ def speech_recognition():
         query = ""
 
     print(query)
+    
+    query = query.lower()
 
-    if "close program" in query:
+    if query == "close program":
         quit()
-    if "lock system" in query:
+    if "lock system":
         os.system("rundll32.exe user32.dll,LockWorkStation")
-    if "shutdown" in query or "shut down" in query:
+    if query == "shutdown" or query == "shut down":
         os.system("shutdown /s /t 1")
-    if "open steam" in query:
-        subprocess.check_call([r"C:\Program Files (x86)\Steam\Steam.exe"])
 
 while True:
     speech_recognition()
