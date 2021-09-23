@@ -26,11 +26,14 @@ def speech_recognition():
 
     print(query)
 
-    if "lock" in query: # all of these being "if" makes it so you can string them together, so you can, for exmaple, say "lock and quit"
+    if "close program" in query:
+        quit()
+    if "lock system" in query:
         os.system("rundll32.exe user32.dll,LockWorkStation")
     if "shutdown" in query or "shut down" in query:
         os.system("shutdown /s /t 1")
     if "open steam" in query:
         subprocess.check_call([r"C:\Program Files (x86)\Steam\Steam.exe"])
 
-speech_recognition()
+while True:
+    speech_recognition()
