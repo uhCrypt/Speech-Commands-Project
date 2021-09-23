@@ -4,8 +4,6 @@ import time
 import zipfile
 import os
 
-print(sys.argv[0])
-
 # Functions
 def installPath(package):
     os.system('python -m pip install ' + os.path.join(package))
