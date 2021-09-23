@@ -1,5 +1,6 @@
 import subprocess
 import speech_recognition as sr
+import os
 
 def speech_recognition():
     r = sr.Recognizer()
@@ -31,7 +32,5 @@ def speech_recognition():
         os.system("shutdown /s /t 1")
     if "open steam" in query:
         subprocess.check_call([r"C:\Program Files (x86)\Steam\Steam.exe"])
-    if "open discord" in query:
-        subprocess.check_call([r"C:\Users\uhcry_8hxodbw\AppData\Local\Discord\Update.exe --processStart Discord.exe"])
 
 speech_recognition()
