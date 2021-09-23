@@ -1,3 +1,5 @@
+# Modules
+import subprocess
 import sys
 import platform
 import time
@@ -55,7 +57,7 @@ if platform_Version == "32bit" or platform_Version == "64bit":
             installModule("SpeechRecognition")
             print("Successfully installed SpeechRecognition.")
 
-        if 'pyautogui' in installed_packages:
+        if 'PyAutoGUI' in installed_packages:
             print("PyAutoGui is already installed, skipping step.")
         else:
             installModule("pyautogui")
