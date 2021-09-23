@@ -1,5 +1,3 @@
-# Modules
-import subprocess
 import sys
 import platform
 import time
@@ -9,9 +7,10 @@ import os
 print(sys.argv[0])
 
 # Functions
-def install(package):
-    #subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+def installPath(package):
     os.system('python -m pip install ' + os.path.join(package))
+def installModule(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 # Unzipping files
 with zipfile.ZipFile(os.path.join(".\\Packages\Zipped\PyAudio.zip"), 'r') as zip_ref:
@@ -40,14 +39,14 @@ if platform_Version == "32bit" or platform_Version == "64bit":
         else:
             if platform_Version == "64bit":
                 if int(python_Version_Digit) >= 38:
-                    install(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win_amd64.whl")
+                    installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win_amd64.whl")
                 else:
-                    install(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win_amd64.whl")
+                    installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win_amd64.whl")
             else:
                 if int(python_Version_Digit) >= 38:
-                    install(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win32.whl")
+                    installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win32.whl")
                 else:
-                    install(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win32.whl")
+                    installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win32.whl")
             print("Successfully installed PyAudio.")
 
         print("Attempting to download and install SpeechRecognition...")
@@ -55,8 +54,14 @@ if platform_Version == "32bit" or platform_Version == "64bit":
         if 'SpeechRecognition' in installed_packages:
             print("SpeechRecognition is already installed, skipping step.")
         else:
-            install("SpeechRecognition")
+            installModule("SpeechRecognition")
             print("Successfully installed SpeechRecognition.")
+
+        if 'pyautogui' in installed_packages:
+            print("PyAutoGui is already installed, skipping step.")
+        else:
+            installModule("pyautogui")
+            print("Successfully installed PyAutoGui.")
 
         print("Setup complete - This program will automatically terminate.")
         time.sleep(3)
