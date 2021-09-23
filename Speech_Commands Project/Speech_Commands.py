@@ -30,7 +30,7 @@ def speech_recognition():
 
     if query == "close program":
         quit()
-    if "lock system":
+    if query == "lock system":
         os.system("rundll32.exe user32.dll,LockWorkStation")
     if query == "shutdown" or query == "shut down":
         os.system("shutdown /s /t 1")
