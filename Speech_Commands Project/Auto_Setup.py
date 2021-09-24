@@ -30,7 +30,7 @@ else:
 
 
 # Functions
-def installPath(packageName, packageInfo):
+def installPath(packageInfo):
     os.system('python -m pip install ' + os.path.join(packageInfo))
 
 def installModule(packageName, packageInfo):
