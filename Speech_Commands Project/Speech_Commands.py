@@ -1,6 +1,9 @@
+import subprocess
 import speech_recognition as sr
 import os
+import webbrowser
 import pyautogui
+import time
 
 def ui_ConfirmMsg(Desc, Ttl):
     if pyautogui.confirm(text=Desc, title=Ttl) == "OK":
@@ -11,14 +14,15 @@ def ui_ConfirmMsg(Desc, Ttl):
 def speech_recognition():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Speak now")
-        audio = r.listen(source)
+        print("Awaiting voice input...")
+        audio = r.listen(source, phrase_time_limit=5)
+            
     print(audio)
     
     try:
         r.pause_threshold = 1
         r.energy_threshold = 4000
-        query = r.recognize_google(audio)
+        query = r.recognize_google(audio, language="en-GB")
         
     except sr.UnknownValueError as e:
         print(f"speech_recognition.UnknownValueError: {e}")
@@ -31,16 +35,20 @@ def speech_recognition():
         query = ""
 
     print(query)
-    
+
     query = query.lower()
 
-    if query == "close program":
-        if ui_ConfirmMsg('Are you sure you want to close the program?', 'Are you sure?') == "OK":
+    command_phrase = "hey computer"
+    if not query.startswith(command_phrase): return False
+
+    # if query == "exit program":
+    if "exit program" in query:
+        if ui_ConfirmMsg('Are you sure you want to exit the program?', 'Are you sure?') == "OK":
             quit()
         else:
-            print("CANCELLED - close program")
+            print("CANCELLED - exit program")
             
-    if query == "lock system":
+    if "lock system" in query:
         if ui_ConfirmMsg('Are you sure you want to lock your system?', 'Are you sure?') == "OK":
             os.system("rundll32.exe user32.dll,LockWorkStation")
         else:
@@ -48,9 +56,16 @@ def speech_recognition():
             
     if query == "shutdown" or query == "shut down":
         if ui_ConfirmMsg('Are you sure you want to shutdown your system?', 'Are you sure?') == "OK":
-            os.system("shutdown /s /t 1")
+            os.system("shutdown -s -t 0")
         else:
             print("CANCELLED - shutdown/shut down")
-
+            
+            
+    if query == "open steam":
+        subprocess.check_call([r"C:\Program Files (x86)\Steam\Steam.exe"])
+        
+    if query == "open opera":
+        subprocess.check_call([r"C:\Users\uhcry_8hxodbw\AppData\Local\Programs\Opera GX\launcher.exe"])
+        
 while True:
     speech_recognition()
