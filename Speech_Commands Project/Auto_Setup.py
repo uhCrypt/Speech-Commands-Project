@@ -52,7 +52,7 @@ if platform_Version == "32bit" or platform_Version == "64bit":
     
     print("Python", python_Version_Normal, "detected.\n\nChecking for a compatible PyAudio module...\n")
     
-    if int(python_Version_Digit) >= 34 and int(python_Version_Digit) <= 39:
+    if int(python_Version_Digit) >= 34 and int(python_Version_Digit) <= 310:
         print("Compatible PyAudio module found.\n\nAttempting to download and install PyAudio...\n")
 
         reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
