@@ -50,10 +50,10 @@ if platform_Version == "32bit" or platform_Version == "64bit":
     python_Version_Tuple = platform.python_version_tuple()
     python_Version_Digit = python_Version_Tuple[0] + "" + python_Version_Tuple[1]
     
-    print("Python", python_Version_Normal, "detected.\n\nChecking for a compatable PyAudio module...\n")
+    print("Python", python_Version_Normal, "detected.\n\nChecking for a compatible PyAudio module...\n")
     
-    if int(python_Version_Digit) >= 27 and int(python_Version_Digit) <= 39:
-        print("Compatable PyAudio module found.\n\nAttempting to download and install PyAudio...\n")
+    if int(python_Version_Digit) >= 34 and int(python_Version_Digit) <= 39:
+        print("Compatible PyAudio module found.\n\nAttempting to download and install PyAudio...\n")
 
         reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
         installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
@@ -63,19 +63,19 @@ if platform_Version == "32bit" or platform_Version == "64bit":
             print("PyAudio is already installed, skipping step.\n")
         else:
             # Unzipping files
-            with zipfile.ZipFile(os.path.join(".\\Packages\Zipped\PyAudio.zip"), 'r') as zip_ref:
-                zip_ref.extractall(os.path.join(".\\Packages\\Unzipped"))
+            with zipfile.ZipFile(os.path.join(".\\Packages\\PyAudio_Compressed.zip"), 'r') as zip_ref:
+                zip_ref.extractall(os.path.join(".\\Packages"))
             # Running installation
             if platform_Version == "64bit":
                 if int(python_Version_Digit) >= 38:
-                    installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win_amd64.whl")
+                    installPath(".\\Packages\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win_amd64.whl")
                 else:
-                    installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win_amd64.whl")
+                    installPath(".\\Packages\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win_amd64.whl")
             else:
                 if int(python_Version_Digit) >= 38:
-                    installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win32.whl")
+                    installPath(".\\Packages\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win32.whl")
                 else:
-                    installPath(".\\Packages\\Unzipped\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win32.whl")
+                    installPath(".\\Packages\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win32.whl")
             print("Successfully installed PyAudio.\n")
         
         # Installing SpeechRecognition
@@ -92,6 +92,7 @@ if platform_Version == "32bit" or platform_Version == "64bit":
 
         else:
             installModule("SpeechRecognition", "SpeechRecognition==3.8.1")
+            print("Successfully installed SpeechRecognition.\n")
 
         # Installing PyAutoGUI
         if 'PyAutoGUI' in installed_packages:
@@ -106,12 +107,18 @@ if platform_Version == "32bit" or platform_Version == "64bit":
                     print("Skipping PyAutoGui installation of recommended version.\n")
         else:
             installModule("PyAutoGui", "pyautogui==0.9.53")
+            print("Successfully installed PyAutoGui.\n")
+
+        #print("Clearing files...")
+        #os.remove(os.path.join(".\\Packages\\PyAudio"))
 
         print("Setup complete - This program will automatically terminate.\n")
         time.sleep(5)
         quit()
     else:
-        print("You don't have a compatable Python Version installed. Please make sure you have Python 2.7.X - Python 3.9.X installed.")
+        print("You don't have a compatible Python Version installed. Please make sure you have Python 3.4.X - Python 3.10.X installed.")
+        time.sleep(5)
+        quit()
 else:
     print("32bit or 64bit platform not detected. Please manually install the packages required in the 'Manual.txt' file.")
     time.sleep(5)
