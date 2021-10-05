@@ -68,14 +68,14 @@ if platform_Version == "32bit" or platform_Version == "64bit":
             # Running installation
             if platform_Version == "64bit":
                 if int(python_Version_Digit) >= 38:
-                    installPath(".\\Packages\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win_amd64.whl")
+                    installPath(".\\Packages\\PyAudio_Compressed\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win_amd64.whl")
                 else:
-                    installPath(".\\Packages\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win_amd64.whl")
+                    installPath(".\\Packages\\PyAudio_Compressed\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win_amd64.whl")
             else:
                 if int(python_Version_Digit) >= 38:
-                    installPath(".\\Packages\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win32.whl")
+                    installPath(".\\Packages\\PyAudio_Compressed\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "-win32.whl")
                 else:
-                    installPath(".\\Packages\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win32.whl")
+                    installPath(".\\Packages\\PyAudio_Compressed\\PyAudio\\PyAudio-0.2.11-cp" + python_Version_Digit + "-cp" + python_Version_Digit + "m-win32.whl")
             print("Successfully installed PyAudio.\n")
         
         # Installing SpeechRecognition
