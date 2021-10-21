@@ -1,0 +1,6 @@
+{
+	"activateKey": "a",
+	"waitForAudioInput": "True",
+	"waitForAudioTimer": 5,
+	"beepSounds": "True"
+}

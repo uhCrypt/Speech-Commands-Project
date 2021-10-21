@@ -1,0 +1,7 @@
+{
+	"exit program": "quit()",
+	"lock system": "os.system('rundll32.exe user32.dll,LockWorkStation')",
+	"shutdown": "os.system('shutdown -s -t 0')",
+	"clear": "os.system('cls')",
+	"restart program": ""
+}
